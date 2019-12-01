@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.lavamancer.articles.R;
+import com.lavamancer.articles.Session;
 import com.lavamancer.articles.model.Post;
+import com.lavamancer.articles.model.User;
+
 import java.util.List;
 
 
@@ -67,9 +71,18 @@ public class PostAdapter extends BaseAdapter {
 
         Post post = list.get(i);
         holder.titleTextView.setText(post.getTitle());
-        holder.authorTextView.setText("User: " + post.getUserId());
         holder.dateTextView.setText("Article: " + post.getId());
         holder.bodyTextView.setText(post.getBody());
+
+        User user = Session.getInstance().users.stream()
+                .filter(u -> u.getId().longValue() == post.getUserId().longValue())
+                .findFirst()
+                .orElse(null);
+        if (user != null) {
+            holder.authorTextView.setText(user.getName());
+        } else {
+            holder.authorTextView.setText("User: " + post.getUserId());
+        }
 
         return view;
     }

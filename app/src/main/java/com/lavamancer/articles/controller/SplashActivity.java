@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.lavamancer.articles.R;
-import com.lavamancer.articles.service.SplashService;
+import com.lavamancer.articles.service.UserService;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -14,7 +14,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        SplashService.getLoading(this);
+//        SplashService.getLoading(this);
+        UserService.getUsers(this);
 
     }
 
